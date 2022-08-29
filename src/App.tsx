@@ -1,7 +1,21 @@
+import Header from './components/Header/Header'
+import Sidebar from './components/Sidebar/Sidebar'
+import './global.css'
+
+import styles from './App.module.css'
+
 function App() {
 
   return (
-    <h1>Hello World</h1>
+    <>
+      <Header />
+      <div className={styles.wrapper}>
+        <Sidebar />
+        <div className='feed'>
+          Feed
+        </div>
+      </div>
+    </>
   )
 }
 
