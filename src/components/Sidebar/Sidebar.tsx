@@ -16,10 +16,10 @@ function Sidebar(){
                 </span>
             </main>
             <footer>
-                <button>
+                <a href='#'>
                     <PencilSimpleLine />
                     Editar seu perfil
-                </button>
+                </a>
             </footer>
         </aside>
     )

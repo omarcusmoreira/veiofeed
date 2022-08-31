@@ -1,0 +1,74 @@
+.wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--gray-800);
+    border-radius: 8px;
+    padding: 2.5rem;
+}
+
+.wrapper header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.wrapper header div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    width: 70%;
+    margin-left: 1rem;
+}
+.wrapper header time{
+    color: var(--gray-400);
+    font-size: 0.875rem;
+    flex-wrap: nowrap;
+}
+.wrapper main{
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-600);
+}
+.wrapper a{
+    text-decoration: none;
+    color: var(--green);
+}
+.wrapper a:hover{
+    color: var(--green-light);
+}
+.wrapper form textarea{
+    background-color: var(--gray-900);
+    width: 100%;
+    border-radius: 8px;
+
+    padding: 0.8125rem 1rem;
+    resize: none;
+    margin: 1rem 0;
+    height: 6rem;
+}
+.footerFocus:focus-within{
+    visibility: visible;
+    max-height: none;
+}
+.footerFocus{
+    visibility: hidden;
+    max-height: 0;
+}
+.wrapper form button{
+    background-color: var(--green);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 0;
+    color: var(--white);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 1rem;
+}
+.wrapper form button:hover{
+    background-color: var(--green-light);
+}

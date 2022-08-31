@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import './global.css'
 
 import styles from './App.module.css'
+import Post from './components/Posts/Post'
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <div className='feed'>
-          Feed
+          <Post />
         </div>
       </div>
     </>

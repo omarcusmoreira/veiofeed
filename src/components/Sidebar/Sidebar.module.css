@@ -27,8 +27,8 @@
 }
 .wrapper span{
     margin: .5rem 0 1.25rem;
-    font-weight: 100;
     font-size: 0.875rem;
+    color: var(--gray-400);
     font-family: 'Roboto', sans-serif;
 }
 
@@ -36,6 +36,26 @@
     display: flex;
     justify-content: center;
     border-top: 1px solid var(--gray-600);
-    margin: 1.25rem 0;
+    padding: 1.25rem 0;
 
+}
+
+.wrapper footer a{
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 0.875rem;
+    color: var(--green);
+    transition: 0.2s;
+}
+.wrapper footer a:hover{
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.wrapper footer svg{
+    margin-right: 0.25rem;
 }
