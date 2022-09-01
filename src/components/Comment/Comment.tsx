@@ -2,7 +2,10 @@ import Avatar from "../Avatar/Avatar";
 import { Trash, ThumbsUp } from 'phosphor-react'
 import styles from './Comment.module.css'
 
-function Comment(){
+type Props = {
+    comment: string,
+}
+function Comment({comment}: Props){
     return(
         <div className={styles.wrapper}>
             <Avatar src='https://github.com/maykbrito.png'hasBorder={false}/>
@@ -15,7 +18,7 @@ function Comment(){
                         </div>
                         <button><Trash /></button>
                     </div>
-                    <p>Muito bom Marcão, parabéns!! 👏👏</p>
+                    <p>{comment}</p>
                 </div>
                 <div className={styles.footer}>
                         <a href=""><ThumbsUp/> Aplaudir <span>19</span></a>

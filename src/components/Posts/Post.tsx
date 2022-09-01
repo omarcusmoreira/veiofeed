@@ -1,40 +1,81 @@
 import Avatar from '../Avatar/Avatar'
 import Comment from '../Comment/Comment'
 import styles from './Post.module.css'
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/esm/locale/pt-BR/index.js'
+import { useState } from 'react'
+type Props ={
+    author: {
+        avatarUrl: string;
+        name: string,
+        position: string,
+    };
+    content: {
+        type: string,
+        text: string,
+    }[];
+    publishedAt: Date;
+}
 
-function Post(){
+function Post( {author, content, publishedAt}:Props ){
+
+    const formattedDate = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
+        locale: ptBR
+    })
+    const distanceFromPublished = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true,
+    })
+    const [ comments, setComments] = useState([]);
+    const [ newCommentText, setNewCommentText] = useState('');
+
+    function handleCreateNewComment(){
+        event?.preventDefault()
+        setComments(...comments,newCommentText)
+    }
+    function handleNewCommentChange(event:any){
+        setNewCommentText(event.target.value)
+    }
     return (
         <article className={styles.wrapper}>
-
             <header>
-                <Avatar src='https://github.com/maykbrito.png' />
+                <Avatar src={author.avatarUrl} />
                 <div>
-                    <strong>Marcus Moreira</strong>
-                    <span>Web Developer</span>
+                    <strong>{author.name}</strong>
+                    <span>{author.position}</span>
                 </div>
-                <time>Publicado há 1 hora</time>
+                <time >{distanceFromPublished}</time>
             </header>
 
             <main>
-                <p>Fala galeraa 👋</p>
-                <br />
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-                <br />
-                <a href=''>👉jane.design/doctorcare</a>
-                <br />{'  '}<br />
-                <a href=''>#novoprojeto</a>{'  '}<a href=''>#nlw</a>{'  '}<a href=''>#rocketseat</a>
+                {content.map(line => {
+                    if (line.type === 'text') {
+                        return(
+                            <p>{line.text}</p>
+                        )
+                    } else if (line.type === 'link') {
+                        return (
+                            <p><a href="">{line.text}</a></p>
+                        )
+                    }
+                })}
             </main>
             
-            <form>
+            <form onSubmit={handleCreateNewComment}>
                 <strong>Deixe seu comentário</strong>
-                <textarea placeholder='Deixe um comentário'/>
+                <textarea 
+                    placeholder='Deixe um comentário'
+                    value={newCommentText}
+                    onChange={event=>{handleNewCommentChange(event)}}
+                />
                 <footer className={styles.footerFocus}>
                     <button type='submit'>Publicar</button>
                 </footer>
             </form>
-            <Comment />
-            <Comment />
-
+            {comments.map(comment => {
+                return(<Comment comment={comment}/>)
+            })}
+            
         </article>
     )
 }
