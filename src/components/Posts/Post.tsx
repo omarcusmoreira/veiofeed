@@ -5,6 +5,7 @@ import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js'
 import { useState } from 'react'
 type Props ={
+    // id: number;
     author: {
         avatarUrl: string;
         name: string,
@@ -17,7 +18,7 @@ type Props ={
     publishedAt: Date;
 }
 
-function Post( {author, content, publishedAt}:Props ){
+function Post( {author, content, publishedAt }:Props ){
 
     const formattedDate = format(publishedAt, "d 'de' LLLL 'as' HH:mm'h'",{
         locale: ptBR
@@ -26,16 +27,26 @@ function Post( {author, content, publishedAt}:Props ){
         locale: ptBR,
         addSuffix: true,
     })
-    const [ comments, setComments] = useState([]);
+    const [ comments, setComments] = useState<string[]>([]);
     const [ newCommentText, setNewCommentText] = useState('');
 
     function handleCreateNewComment(){
         event?.preventDefault()
-        setComments(...comments,newCommentText)
+        setComments([...comments, newCommentText])
+        setNewCommentText('')
     }
     function handleNewCommentChange(event:any){
         setNewCommentText(event.target.value)
     }
+
+    function deleteComment(commentToDelete:string){
+        const newCommentArray = comments.filter( comment => {
+            return comment !== commentToDelete
+        })
+        setComments(newCommentArray)
+    }
+    const isTextAreaEmpty = newCommentText.length === 0
+    
     return (
         <article className={styles.wrapper}>
             <header>
@@ -67,13 +78,19 @@ function Post( {author, content, publishedAt}:Props ){
                     placeholder='Deixe um comentário'
                     value={newCommentText}
                     onChange={event=>{handleNewCommentChange(event)}}
+                    required
                 />
                 <footer className={styles.footerFocus}>
-                    <button type='submit'>Publicar</button>
+                    <button 
+                        type='submit'
+                        disabled={isTextAreaEmpty}
+                    >
+                        Publicar
+                    </button>
                 </footer>
             </form>
             {comments.map(comment => {
-                return(<Comment comment={comment}/>)
+                return(<Comment comment={comment} onDeleteComment={deleteComment}/>)
             })}
             
         </article>
